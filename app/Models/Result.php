@@ -12,4 +12,9 @@ class Result extends Model
         'runner_up',
         'date'
     ];
+
+      protected $casts = [
+        'date' => 'datetime',
+    ];
+
 }

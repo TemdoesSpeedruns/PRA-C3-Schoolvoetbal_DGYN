@@ -1,9 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
-<h1>Toernooi Historie</h1>
+<h2>Historie Uitslagen</h2>
 
-<table class="table table-striped">
+<table border="1" cellpadding="5">
     <thead>
         <tr>
             <th>Datum</th>
@@ -13,7 +13,7 @@
         </tr>
     </thead>
     <tbody>
-        @foreach($history as $h)
+        @foreach($results as $h)
             <tr>
                 <td>{{ $h->date->format('d-m-Y') }}</td>
                 <td>{{ $h->tournament_name }}</td>
