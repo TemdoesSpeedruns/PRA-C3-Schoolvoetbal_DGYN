@@ -3,47 +3,21 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Result;
+use App\Models\Tournament;
 
 class ResultController extends Controller
 {
-    // Laatste 10 uitslagen
+    // Laatste uitslagen / current results
     public function index()
     {
-        $results = Result::orderBy('date', 'desc')->limit(10)->get();
-        return view('results.index', compact('results'));
+        $tournaments = Tournament::where('status', 'active')->get();
+        return view('results', compact('tournaments')); // resources/views/results.blade.php
     }
 
-    // Historie
+    // Historie / previous winners
     public function history()
     {
-        $results = Result::orderBy('date', 'desc')->get();
-        return view('results.history', compact('results'));
-    }
-
-    // Formulier tonen
-    public function create()
-    {
-        return view('results.create');
-    }
-
-    // Opslaan
-    public function store(Request $request)
-    {
-        $request->validate([
-            'tournament_name' => 'required|string|max:255',
-            'winner_name' => 'required|string|max:255',
-            'runner_up' => 'nullable|string|max:255',
-            'date' => 'required|date'
-        ]);
-
-        Result::create([
-            'tournament_name' => $request->tournament_name,
-            'winner_name' => $request->winner_name,
-            'runner_up' => $request->runner_up,
-            'date' => $request->date
-        ]);
-
-        return redirect('/uitslagen');
+        $tournaments = Tournament::where('status', 'completed')->get();
+        return view('historie', compact('tournaments')); // resources/views/historie.blade.php
     }
 }

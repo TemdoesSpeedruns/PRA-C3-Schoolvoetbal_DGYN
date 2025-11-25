@@ -1,21 +1,31 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ResultController;
+use Illuminate\Support\Facades\Route;
 
-// Home
+// Welcome / Home page
 Route::get('/', function () {
     return view('welcome');
+})->name('home');
+
+// Current tournament results
+Route::get('/uitslagen', [ResultController::class, 'index'])->name('results');
+
+// Past winners / historical tournaments
+Route::get('/historie', [ResultController::class, 'history'])->name('historie');
+
+// Dashboard (auth + verified)
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
+
+// Authenticated user profile routes
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-// Laatste uitslagen
-Route::get('/uitslagen', [ResultController::class, 'index'])->name('results.index');
-
-// Historie
-Route::get('/historie', [ResultController::class, 'history'])->name('results.history');
-
-// Formulier tonen (GET) – zonder auth
-Route::get('/uitslagen/toevoegen', [ResultController::class, 'create'])->name('results.create');
-
-// Opslaan (POST) – zonder auth
-Route::post('/uitslagen/toevoegen', [ResultController::class, 'store'])->name('results.store');
+// Include Breeze / auth routes
+require __DIR__.'/auth.php';
