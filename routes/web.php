@@ -20,6 +20,11 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+// Dashboard (auth + verified)
+Route::get('/AdminDashboard', function () {
+    return view('AdminDashboard');
+})->middleware(['auth', 'verified'])->name('AdminDashboard');
+
 // Authenticated user profile routes
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

@@ -21,6 +21,9 @@
                     <x-nav-link :href="route('historie')" :active="request()->routeIs('historie')">
                         {{ __('Vorige Winnaars') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('AdminDashboard')" :active="request()->routeIs('AdminDashboard')">
+                        {{ __('Admin Dashboard') }}
+                    </x-nav-link>
                 </div>
             </div>
 
