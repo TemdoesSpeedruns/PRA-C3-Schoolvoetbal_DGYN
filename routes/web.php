@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ResultController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AdminDashboardController;
 
 // Welcome / Home page
 Route::get('/', function () {
@@ -21,9 +22,9 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 // Dashboard (auth + verified)
-Route::get('/AdminDashboard', function () {
-    return view('AdminDashboard');
-})->middleware(['auth', 'verified'])->name('AdminDashboard');
+Route::get('/AdminDashboard', [AdminDashboardController::class, 'index'])
+    ->middleware(['auth', 'verified'])
+    ->name('AdminDashboard');
 
 // Authenticated user profile routes
 Route::middleware('auth')->group(function () {
