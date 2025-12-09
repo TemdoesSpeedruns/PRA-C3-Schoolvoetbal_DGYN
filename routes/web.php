@@ -2,8 +2,9 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ResultController;
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminDashboardController;
+use App\Http\Controllers\AdminUserController;
+use Illuminate\Support\Facades\Route;
 
 // Welcome / Home page
 Route::get('/', function () {
@@ -17,14 +18,20 @@ Route::get('/uitslagen', [ResultController::class, 'index'])->name('results');
 Route::get('/historie', [ResultController::class, 'history'])->name('historie');
 
 // Dashboard (auth + verified)
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
-
-// Dashboard (auth + verified)
-Route::get('/AdminDashboard', [AdminDashboardController::class, 'index'])
+Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'index'])
     ->middleware(['auth', 'verified'])
+    ->name('dashboard');
+
+// Admin Dashboard (auth + admin)
+Route::get('/AdminDashboard', [AdminDashboardController::class, 'index'])
+    ->middleware(['auth', 'admin'])
     ->name('AdminDashboard');
+
+// Manage Users (admin only)
+Route::middleware(['auth','admin'])->group(function () {
+    Route::get('/manage-users', [AdminUserController::class, 'index'])->name('manage.users');
+    Route::post('/manage-users/{user}/toggle-admin', [AdminUserController::class, 'toggleAdmin'])->name('manage.users.toggleAdmin');
+});
 
 // Authenticated user profile routes
 Route::middleware('auth')->group(function () {

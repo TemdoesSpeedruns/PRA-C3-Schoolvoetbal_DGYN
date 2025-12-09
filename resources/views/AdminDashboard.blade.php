@@ -81,7 +81,7 @@
                     <h5>Quick Actions</h5>
                 </div>
                 <div class="card-body">
-                    <a href="#" class="btn btn-primary btn-block mb-2">Manage Users</a>
+                    <a href="{{ route('manage.users') }}" class="btn btn-primary btn-block mb-2">Manage Users</a>
                     <a href="#" class="btn btn-primary btn-block mb-2">Manage Teams</a>
                     <a href="#" class="btn btn-primary btn-block mb-2">View Reports</a>
                     <a href="#" class="btn btn-primary btn-block">Settings</a>
