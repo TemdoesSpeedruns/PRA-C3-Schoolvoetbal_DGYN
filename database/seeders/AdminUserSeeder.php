@@ -11,13 +11,13 @@ class AdminUserSeeder extends Seeder
     public function run()
     {
         // Zorg dat de standaard admin altijd bestaat
-        $adminEmail = 'TemAdminAccount@gmail.com';
+        $adminEmail = 'PaastoernooiAdmin@gmail.com';
 
         $admin = User::firstOrCreate(
             ['email' => $adminEmail], // zoekt op email
             [
                 'name' => 'Super Admin',
-                'password' => Hash::make('Temdoespasswording'), // pas dit aan
+                'password' => Hash::make('Paastoernooiwachtwoordadminaccount'), // pas dit aan
                 'is_admin' => true,
             ]
         );
