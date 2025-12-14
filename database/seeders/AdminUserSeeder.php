@@ -21,6 +21,16 @@ class AdminUserSeeder extends Seeder
                 'is_admin' => true,
             ]
         );
+        $adminEmail = 'giovanni.vanderweegen@gmail.com';
+
+        $admin = User::firstOrCreate(
+            ['email' => $adminEmail], // zoekt op email
+            [
+                'name' => 'SuperAdmin',
+                'password' => Hash::make('password123'), // pas dit aan
+                'is_admin' => true,
+            ]
+        );
 
         // Zorg dat dit account altijd admin blijft
         if (!$admin->is_admin) {
