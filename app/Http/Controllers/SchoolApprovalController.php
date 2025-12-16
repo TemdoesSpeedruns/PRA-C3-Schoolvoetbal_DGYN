@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Mail\SchoolRegistrationConfirmation;
@@ -15,7 +15,7 @@ class SchoolApprovalController extends Controller
     public function __construct()
     {
         // Zorg dat alleen geauthenticeerde admins bij deze controller kunnen
-        $this->middleware(['auth', 'is_admin']);
+        $this->middleware(['auth', 'admin']);
     }
 
     public function index(Request $request): View
