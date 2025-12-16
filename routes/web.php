@@ -5,6 +5,8 @@ use App\Http\Controllers\ResultController;
 use App\Http\Controllers\AdminDashboardController;
 use App\Http\Controllers\AdminUserController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\SchoolApprovalController;
+use App\Http\Controllers\SchoolRegistrationController;
 
 // Welcome / Home page
 Route::get('/', function () {
@@ -40,5 +42,15 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+// Publieke registratie
+Route::get('/scholen/registreren', [SchoolRegistrationController::class, 'showForm'])->name('schools.register.form');
+Route::post('/scholen/registreren', [SchoolRegistrationController::class, 'register'])->name('schools.register');
+
+// Admin routes (zorg dat middleware is geregistreerd)
+Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () {
+    Route::get('/scholen', [SchoolApprovalController::class, 'index'])->name('schools.index');
+    Route::post('/scholen/{id}/approve', [SchoolApprovalController::class, 'approve'])->name('schools.approve');
+    Route::post('/scholen/{id}/reject', [SchoolApprovalController::class, 'reject'])->name('schools.reject');
+});
 // Include Breeze / auth routes
 require __DIR__.'/auth.php';

@@ -9,3 +9,9 @@ $classes = ($active ?? false)
 <a {{ $attributes->merge(['class' => $classes]) }}>
     {{ $slot }}
 </a>
+
+@auth
+    @if(auth()->user()->is_admin)
+        <a href="{{ route('admin.schools.index') }}">Scholen beheren</a>
+    @endif
+@endauth
