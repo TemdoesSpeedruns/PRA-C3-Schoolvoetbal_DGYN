@@ -21,7 +21,7 @@
         <div class="col-md-3">
             <div class="card bg-white border">
                 <div class="card-body">
-                    <h5 class="card-title text-black text-white">Total Teams</h5>
+                    <h5 class="card-title text-black">Total Teams</h5>
                     <p class="card-text display-4 text-black ">{{ $totalTeams ?? 0 }}</p>
                 </div>
             </div>

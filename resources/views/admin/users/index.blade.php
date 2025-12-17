@@ -2,7 +2,6 @@
 
 @section('content')
 <div class="container">
-    <h1 class="text-black mb-4">Manage Users</h1>
 
     @if(session('success'))
         <div class="bg-green-100  text-green-800  px-4 py-2 rounded mb-2">
