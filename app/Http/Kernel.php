@@ -1,73 +1,44 @@
 <?php
 
-namespace App\Http;
+namespace Database\Factories;
 
-use Illuminate\Foundation\Http\Kernel as HttpKernel;
-use App\Http\Middleware\TrustProxies;
-use Fruitcake\Cors\HandleCors;
-use App\Http\Middleware\PreventRequestsDuringMaintenance;
-use Illuminate\Http\Middleware\SetCacheHeaders;
-use App\Http\Middleware\TrimStrings;
-use Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull;
-use App\Http\Middleware\EncryptCookies;
-use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
-use Illuminate\Session\Middleware\StartSession;
-use Illuminate\View\Middleware\ShareErrorsFromSession;
-use App\Http\Middleware\VerifyCsrfToken;
-use Illuminate\Routing\Middleware\SubstituteBindings;
-use Illuminate\Auth\Middleware\Authenticate;
-use App\Http\Middleware\RedirectIfAuthenticated;
+use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
-class Kernel extends HttpKernel
+/**
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\User>
+ */
+class UserFactory extends Factory
 {
     /**
-     * The application's global HTTP middleware stack.
-     *
-     * @var array<int, class-string|string>
+     * The current password being used by the factory.
      */
-    protected $middleware = [
-        // \App\Http\Middleware\TrustHosts::class,
-        TrustProxies::class,
-        HandleCors::class,
-        PreventRequestsDuringMaintenance::class,
-        TrimStrings::class,
-        ConvertEmptyStringsToNull::class,
-    ];
+    protected static ?string $password;
 
     /**
-     * The application's route middleware groups.
+     * Define the model's default state.
      *
-     * @var array<string, array<int, class-string|string>>
+     * @return array<string, mixed>
      */
-    protected $middlewareGroups = [
-        'web' => [
-            EncryptCookies::class,
-            AddQueuedCookiesToResponse::class,
-            StartSession::class,
-            // \Illuminate\Session\Middleware\AuthenticateSession::class,
-            ShareErrorsFromSession::class,
-            VerifyCsrfToken::class,
-            SubstituteBindings::class,
-        ],
-
-        'api' => [
-            'throttle:api',
-            SubstituteBindings::class,
-        ],
-    ];
+    public function definition(): array
+    {
+        return [
+            'name' => fake()->name(),
+            'email' => fake()->unique()->safeEmail(),
+            'email_verified_at' => now(),
+            'password' => static::$password ??= Hash::make('password'),
+            'remember_token' => Str::random(10),
+        ];
+    }
 
     /**
-     * Route middleware.
-     *
-     * These middleware may be assigned to groups or used individually.
-     *
-     * @var array<string, class-string|string>
+     * Indicate that the model's email address should be unverified.
      */
-    protected $routeMiddleware = [
-        'auth' => Authenticate::class,
-        'guest' => RedirectIfAuthenticated::class,
-        // voeg hier je admin middleware toe:
-        'is_admin' => \App\Http\Middleware\IsAdmin::class,
-        // andere middleware zoals throttle, signed, verified etc.
-    ];
+    public function unverified(): static
+    {
+        return $this->state(fn (array $attributes) => [
+            'email_verified_at' => null,
+        ]);
+    }
 }

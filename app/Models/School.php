@@ -10,8 +10,11 @@ class School extends Model
         'name',
         'contact_person',
         'email',
-        'phone',
-        'address',
         'status',
+    ];
+
+    protected $casts = [
+        'created_at' => 'datetime',
+        'updated_at' => 'datetime',
     ];
 }

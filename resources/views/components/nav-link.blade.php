@@ -12,6 +12,6 @@ $classes = ($active ?? false)
 
 @auth
     @if(auth()->user()->is_admin)
-        <a href="{{ route('admin.schools.index') }}">Scholen beheren</a>
+
     @endif
 @endauth
