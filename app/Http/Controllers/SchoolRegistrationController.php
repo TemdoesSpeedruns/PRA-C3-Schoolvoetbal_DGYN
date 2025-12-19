@@ -11,7 +11,7 @@ class SchoolRegistrationController extends Controller
 {
     public function showForm()
     {
-        return view('schools.register');
+        return view('admin.schools.register');
     }
 
     public function register(Request $request)
@@ -34,7 +34,8 @@ class SchoolRegistrationController extends Controller
             report($e);
         }
 
-        return redirect()->route('schools.register.form')
+        return redirect()->route('admin.schools.register')
             ->with('status', 'Registratie ontvangen. Je ontvangt direct een bevestigingsmail.');
+
     }
 }

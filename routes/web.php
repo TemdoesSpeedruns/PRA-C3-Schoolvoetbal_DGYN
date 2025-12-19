@@ -45,6 +45,8 @@ Route::middleware('auth')->group(function () {
 // Publieke registratie
 Route::get('/scholen/registreren', [SchoolRegistrationController::class, 'showForm'])->name('schools.register.form');
 Route::post('/scholen/registreren', [SchoolRegistrationController::class, 'register'])->name('schools.register');
+Route::get('/admin/schools/register', [SchoolRegistrationController::class, 'showForm'])->name('admin.schools.register');
+
 
 // Admin routes (zorg dat middleware is geregistreerd)
 Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () {

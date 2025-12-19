@@ -45,6 +45,12 @@
                         style="background-color: transparent !important;">
                         {{ __('Admin Scholen') }}
                     </x-nav-link>
+
+                    <x-nav-link :href="route('admin.schools.register')" :active="request()->routeIs('admin.schools.register')"
+                class="text-gray-100 hover:text-white"
+                style="background-color: transparent !important;">
+                {{ __('Registreer School') }}
+                </x-nav-link>
                 </div>
 
 
@@ -141,6 +147,12 @@
                 style="background-color: transparent !important; color: #fff !important;">
                 Vorige Winnaars
             </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('admin.schools.register')" :active="request()->routeIs('admin.schools.register')"
+                class="text-gray-100 hover:text-white"
+                style="background-color: transparent !important;">
+                {{ __('Registreer School') }}
+            </x-responsive-nav-link>
+
         </div>
 
         @auth
