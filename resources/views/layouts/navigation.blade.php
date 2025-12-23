@@ -28,10 +28,22 @@
                         {{ __('Uitslagen') }}
                     </x-nav-link>
 
+                    <x-nav-link :href="route('public.scores')" :active="request()->routeIs('public.scores')"
+                        class="text-gray-100 hover:text-white"
+                        style="background-color: transparent !important;">
+                        {{ __('Wedstrijdresultaten') }}
+                    </x-nav-link>
+
                     <x-nav-link :href="route('historie')" :active="request()->routeIs('historie')"
                         class="text-gray-100 hover:text-white"
                         style="background-color: transparent !important;">
                         {{ __('Vorige Winnaars') }}
+                    </x-nav-link>
+
+                    <x-nav-link :href="route('my.pool')" :active="request()->routeIs('my.pool')"
+                        class="text-gray-100 hover:text-white"
+                        style="background-color: transparent !important;">
+                        {{ __('Mijn Poule') }}
                     </x-nav-link>
 
                     <x-nav-link :href="route('AdminDashboard')" :active="request()->routeIs('AdminDashboard')"
@@ -45,6 +57,16 @@
                         style="background-color: transparent !important;">
                         {{ __('Admin Scholen') }}
                     </x-nav-link>
+
+                    @auth
+                    @if(Auth::user()->is_admin)
+                    <x-nav-link :href="route('admin.scores.index')" :active="request()->routeIs('admin.scores.index', 'admin.scores.create', 'admin.scores.edit')"
+                        class="text-gray-100 hover:text-white"
+                        style="background-color: transparent !important;">
+                        {{ __('Scores Beheren') }}
+                    </x-nav-link>
+                    @endif
+                    @endauth
 
                     <x-nav-link :href="route('admin.schools.register')" :active="request()->routeIs('admin.schools.register')"
                 class="text-gray-100 hover:text-white"
@@ -143,13 +165,38 @@
                 Uitslagen
             </x-responsive-nav-link>
 
+            <x-responsive-nav-link :href="route('public.scores')" :active="request()->routeIs('public.scores')"
+                style="background-color: transparent !important; color: #fff !important;">
+                Wedstrijdresultaten
+            </x-responsive-nav-link>
+
             <x-responsive-nav-link :href="route('historie')" :active="request()->routeIs('historie')"
                 style="background-color: transparent !important; color: #fff !important;">
                 Vorige Winnaars
             </x-responsive-nav-link>
+
+            <x-responsive-nav-link :href="route('AdminDashboard')" :active="request()->routeIs('AdminDashboard')"
+                style="background-color: transparent !important; color: #fff !important;">
+                Admin Dashboard
+            </x-responsive-nav-link>
+
+            <x-responsive-nav-link :href="route('admin.schools.index')" :active="request()->routeIs('admin.schools.index')"
+                style="background-color: transparent !important; color: #fff !important;">
+                Admin Scholen
+            </x-responsive-nav-link>
+
+            @auth
+            @if(Auth::user()->is_admin)
+            <x-responsive-nav-link :href="route('admin.scores.index')" :active="request()->routeIs('admin.scores.index', 'admin.scores.create', 'admin.scores.edit')"
+                style="background-color: transparent !important; color: #fff !important;">
+                Scores Beheren
+            </x-responsive-nav-link>
+            @endif
+            @endauth
+
             <x-responsive-nav-link :href="route('admin.schools.register')" :active="request()->routeIs('admin.schools.register')"
                 class="text-gray-100 hover:text-white"
-                style="background-color: transparent !important;">
+                style="background-color: transparent !important; color: #fff !important;">
                 {{ __('Registreer School') }}
             </x-responsive-nav-link>
 

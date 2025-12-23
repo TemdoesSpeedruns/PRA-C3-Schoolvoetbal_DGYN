@@ -17,11 +17,9 @@ class SchoolRegistrationController extends Controller
     public function register(Request $request)
     {
         $data = $request->validate([
-            'name' => 'required|string|max:255',
-            'contact_person' => 'nullable|string|max:255',
+            'name' => 'required|string|max:255|unique:schools,name',
+            'contact_person' => 'required|string|max:255',
             'email' => 'required|email|max:255|unique:schools,email',
-            'phone' => 'nullable|string|max:50',
-            'address' => 'nullable|string|max:1000',
         ]);
 
         $school = School::create($data + ['status' => 'pending']);
@@ -30,12 +28,10 @@ class SchoolRegistrationController extends Controller
         try {
             Mail::to($school->email)->send(new SchoolRegistrationConfirmation($school));
         } catch (\Exception $e) {
-            // Log het probleem, maar laat registratie slagen
             report($e);
         }
 
-        return redirect()->route('admin.schools.register')
-            ->with('status', 'Registratie ontvangen. Je ontvangt direct een bevestigingsmail.');
-
+        return redirect()->route('schools.register.form')
+            ->with('success', 'Bedankt voor uw registratie! De beheerder zal uw aanvraag binnenkort beoordelen.');
     }
 }

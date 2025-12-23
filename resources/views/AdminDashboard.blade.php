@@ -71,20 +71,25 @@
                     <span>Manage Users</span>
                 </a>
 
-                <a href="#" 
+                <a href="{{ route('admin.schools.index') }}" 
                    class="flex items-center justify-center gap-2 bg-blue-500 text-black py-2 rounded-lg font-medium hover:bg-blue-600 transition">
-                    <span>Manage Teams</span>
+                    <span>Manage Schools</span>
                 </a>
 
-                <a href="#" 
+                <a href="{{ route('admin.pools.index') }}" 
                    class="flex items-center justify-center gap-2 bg-yellow-500 text-black py-2 rounded-lg font-medium hover:bg-yellow-600 transition">
-                    <span>View Scholen</span>
+                    <span>View Pools</span>
+                </a>
+
+                <a href="{{ route('admin.tournaments.index') }}" 
+                   class="flex items-center justify-center gap-2 bg-purple-500 text-black py-2 rounded-lg font-medium hover:bg-purple-600 transition">
+                    <span>Manage Tournaments</span>
                 </a>
 
             </div>
         </div> 
 
-    </div> <
+    </div>
 
 </div>
 @endsection

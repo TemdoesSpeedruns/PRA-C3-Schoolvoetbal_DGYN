@@ -17,7 +17,7 @@ class ResultController extends Controller
     // Historie / previous winners
     public function history()
     {
-        $tournaments = Tournament::where('status', 'completed')->get();
+        $tournaments = Tournament::whereNotNull('winner')->orderBy('year', 'desc')->get();
         return view('historie', compact('tournaments')); // resources/views/historie.blade.php
     }
 }
