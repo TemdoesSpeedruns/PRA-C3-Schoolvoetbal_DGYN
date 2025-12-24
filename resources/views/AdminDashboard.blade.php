@@ -44,9 +44,10 @@
                     </thead>
                     <tbody>
                         @forelse($recentUsers ?? [] as $user)
+                            @php /** @var \App\Models\User $user */ @endphp
                             <tr class="bg-white">
-                                <td class="border border-gray-300 px-2 py-1">{{ $user->name }}</td>
-                                <td class="border border-gray-300 px-2 py-1">{{ $user->email }}</td>
+                                <td class="border border-gray-300 px-2 py-1">@if(isset($user)){{ $user->name }}@endif</td>
+                                <td class="border border-gray-300 px-2 py-1">@if(isset($user)){{ $user->email }}@endif</td>
                             </tr>
                         @empty
                             <tr>

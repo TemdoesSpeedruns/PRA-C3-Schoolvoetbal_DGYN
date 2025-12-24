@@ -24,6 +24,17 @@ Route::get('/historie', [ResultController::class, 'history'])->name('historie');
 // My pool / group assignment
 Route::get('/mijn-poule', [App\Http\Controllers\PublicPoolController::class, 'myPool'])->name('my.pool');
 
+// Schedule / Wedstrijdschema (PUBLIC - geen login nodig)
+Route::get('/schema', function() {
+    $matches = \App\Models\GameMatch::with(['tournament', 'homeSchool', 'awaySchool', 'field', 'referee'])
+        ->whereNotNull('scheduled_time')
+        ->orderBy('scheduled_time', 'asc')
+        ->get();
+    $tournaments = \App\Models\Tournament::all();
+    $fields = \App\Models\Field::where('is_active', true)->get();
+    return view('schedule.public', compact('matches', 'tournaments', 'fields'));
+})->name('schedule.public');
+
 // Publieke score weergave
 Route::get('/scores', [ScoreController::class, 'viewPublic'])->name('public.scores');
 
@@ -80,6 +91,19 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     Route::get('/scores/{match}/edit', [ScoreController::class, 'edit'])->name('scores.edit');
     Route::patch('/scores/{match}', [ScoreController::class, 'update'])->name('scores.update');
     Route::delete('/scores/{match}', [ScoreController::class, 'destroy'])->name('scores.destroy');
+
+    // Schedule / Wedstrijdschema
+    Route::get('/schedule', [\App\Http\Controllers\ScheduleController::class, 'index'])->name('schedule.index');
+    Route::post('/schedule/{match}/schedule', [\App\Http\Controllers\ScheduleController::class, 'schedule'])->name('schedule.schedule');
+    Route::post('/schedule/{match}/unschedule', [\App\Http\Controllers\ScheduleController::class, 'unschedule'])->name('schedule.unschedule');
+    
+    // Fields / Velden beheer
+    Route::get('/schedule/fields', [\App\Http\Controllers\ScheduleController::class, 'fieldsIndex'])->name('schedule.fields.index');
+    Route::post('/schedule/fields', [\App\Http\Controllers\ScheduleController::class, 'fieldStore'])->name('schedule.fields.store');
+    
+    // Referees / Scheidsrechters beheer
+    Route::get('/schedule/referees', [\App\Http\Controllers\ScheduleController::class, 'refereesIndex'])->name('schedule.referees.index');
+    Route::post('/schedule/referees', [\App\Http\Controllers\ScheduleController::class, 'refereeStore'])->name('schedule.referees.store');
 });
 
 // Include Breeze / auth routes

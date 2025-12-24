@@ -17,11 +17,16 @@ class GameMatch extends Model
         'away_goals',
         'status',
         'match_date',
+        'scheduled_time',
+        'duration_minutes',
+        'field_id',
+        'referee_id',
         'notes'
     ];
 
     protected $casts = [
         'match_date' => 'datetime',
+        'scheduled_time' => 'datetime',
     ];
 
     public function tournament(): BelongsTo
@@ -37,5 +42,15 @@ class GameMatch extends Model
     public function awaySchool(): BelongsTo
     {
         return $this->belongsTo(School::class, 'away_school_id');
+    }
+
+    public function field(): BelongsTo
+    {
+        return $this->belongsTo(Field::class);
+    }
+
+    public function referee(): BelongsTo
+    {
+        return $this->belongsTo(Referee::class);
     }
 }
