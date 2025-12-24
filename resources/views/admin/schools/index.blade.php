@@ -42,6 +42,7 @@
                         <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">School</th>
                         <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">Contact Persoon</th>
                         <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">E-mail</th>
+                        <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">Categorie</th>
                         <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">Status</th>
                         <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700">Ingediend</th>
                         <th class="px-6 py-3 text-center text-sm font-semibold text-gray-700">Acties</th>
@@ -57,6 +58,11 @@
                                 <a href="mailto:{{ $school->email }}" class="text-blue-600 hover:underline">
                                     {{ $school->email }}
                                 </a>
+                            </td>
+                            <td class="px-6 py-4 text-sm">
+                                <span class="px-2 py-1 rounded text-xs font-semibold bg-purple-100 text-purple-800">
+                                    {{ $school->category ? ucfirst($school->category) : 'Niet ingesteld' }}
+                                </span>
                             </td>
                             <td class="px-6 py-4 text-sm">
                                 <span class="px-3 py-1 rounded-full text-xs font-semibold

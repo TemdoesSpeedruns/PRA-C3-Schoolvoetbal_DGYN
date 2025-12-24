@@ -24,6 +24,9 @@ class SchoolRegistrationController extends Controller
 
         $school = School::create($data + ['status' => 'pending']);
 
+        // Sla school_id op in session zodat gebruiker via /mijn-poule kan zien
+        session(['school_id' => $school->id]);
+
         // Stuur bevestigingsmail direct na registratie
         try {
             Mail::to($school->email)->send(new SchoolRegistrationConfirmation($school));

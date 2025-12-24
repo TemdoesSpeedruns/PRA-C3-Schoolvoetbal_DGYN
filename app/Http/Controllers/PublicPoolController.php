@@ -3,25 +3,34 @@
 namespace App\Http\Controllers;
 
 use App\Models\School;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 
 class PublicPoolController extends Controller
 {
     public function myPool(): View
     {
-        // Get the school associated with the current user or from the session/request
-        // For now, we'll fetch schools to allow viewing, but in a full implementation
-        // you might want to link schools to users
+        // Probeer school te vinden via:
+        // 1. school_id in sessie
+        // 2. User's school relatie (als ingesteld)
+        // 3. School naam uit ingelogde user
         
-        // If you have a way to identify which school the user represents,
-        // you can fetch it like: $school = auth()->user()->school;
-        
-        // For demonstration, we'll pass null and let the view handle it
         $school = null;
         
-        // If there's a school_id in the session or if you can identify the school
-        // from the authenticated user, fetch it:
-        // $school = School::find(session('school_id'));
+        // Via session
+        if (session('school_id')) {
+            $school = School::find(session('school_id'));
+        }
+        
+        // Via User (als er een school_id kolom is op users tabel)
+        if (!$school && Auth::check() && Auth::user()->school_id) {
+            $school = School::find(Auth::user()->school_id);
+        }
+        
+        // Via User naam (fallback - zoek school op contact_person of email)
+        if (!$school && Auth::check()) {
+            $school = School::where('email', Auth::user()->email)->first();
+        }
         
         return view('my-pool', compact('school'));
     }

@@ -13,6 +13,7 @@ class School extends Model
         'email',
         'status',
         'pool_id',
+        'category',
     ];
 
     protected $casts = [

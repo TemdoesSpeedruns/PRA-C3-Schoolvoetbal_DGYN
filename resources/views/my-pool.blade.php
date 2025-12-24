@@ -34,6 +34,9 @@
                     <div class="mb-4">
                         <h4 class="font-bold text-lg text-blue-900">Poule {{ $school->pool->name }}</h4>
                         <p class="text-gray-600 text-sm">{{ $school->pool->tournament->name }} ({{ ucfirst($school->pool->tournament->type) }})</p>
+                        <p class="text-gray-700 text-sm mt-1">
+                            📚 <strong>Leeftijdscategorie:</strong> <span class="font-semibold text-blue-700">{{ ucfirst($school->pool->category) }}</span>
+                        </p>
                     </div>
 
                     <h4 class="font-bold mb-2">Deelnemende scholen:</h4>
@@ -62,11 +65,10 @@
         @endif
     </div>
 
-    <div class="mt-8 space-y-4">
+    <div class="mt-8 flex flex-col gap-4 sm:flex-row sm:gap-6">
         <a href="{{ route('public.scores') }}" class="inline-block bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
             → Bekijk wedstrijduitslagen
         </a>
-        <br>
         <a href="{{ route('home') }}" class="inline-block bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">
             ← Terug naar home
         </a>

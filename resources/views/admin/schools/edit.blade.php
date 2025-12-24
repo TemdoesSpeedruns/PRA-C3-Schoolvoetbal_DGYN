@@ -102,6 +102,25 @@
                 @enderror
             </div>
 
+            <!-- Leeftijdscategorie -->
+            <div class="mb-8">
+                <label for="category" class="block text-sm font-semibold text-gray-700 mb-2">
+                    Leeftijdscategorie
+                </label>
+                <select id="category" name="category"
+                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent">
+                    <option value="">-- Selecteer categorie --</option>
+                    <option value="3/4" @selected($school->category === '3/4')>Groep 3/4 (7-8 jaar)</option>
+                    <option value="5/6" @selected($school->category === '5/6')>Groep 5/6 (9-10 jaar)</option>
+                    <option value="7/8" @selected($school->category === '7/8')>Groep 7/8 (11-12 jaar)</option>
+                    <option value="brugklas" @selected($school->category === 'brugklas')>Brugklas (12-13 jaar)</option>
+                </select>
+                <p class="text-gray-500 text-sm mt-1">Selecteer de leeftijdscategorie waar deze school aan deelneemt</p>
+                @error('category')
+                    <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                @enderror
+            </div>
+
             <!-- Buttons -->
             <div class="flex gap-4 pt-6 border-t border-gray-200">
                 <button 

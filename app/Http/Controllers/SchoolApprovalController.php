@@ -54,49 +54,61 @@ class SchoolApprovalController extends Controller
 
     private function assignToPool(School $school): void
     {
+        // Beschikbare categorieën
+        $categories = ['3/4', '5/6', '7/8', 'brugklas'];
+        
         // Zoek de actieve toernooien
         $tournaments = \App\Models\Tournament::where('status', 'active')->get();
         
         foreach ($tournaments as $tournament) {
-            // Maak poules aan als ze nog niet bestaan (A, B, C, enz)
-            $poolCount = Pool::where('tournament_id', $tournament->id)->count();
+            // Bepaal categorie: gebruik schoolcategorie of 'all' als niet ingesteld
+            $category = $school->category ?? 'all';
             
-            if ($poolCount === 0) {
-                // Maak standaard poule A aan
-                Pool::create([
+            // Zoek of maak poule voor deze combinatie (tournament + category)
+            $poolQuery = Pool::where('tournament_id', $tournament->id)
+                ->where('category', $category)
+                ->withCount('schools')
+                ->orderBy('schools_count');
+            
+            $pool = $poolQuery->first();
+            
+            // Als geen poule bestaat, maak eerste poule (A) aan
+            if (!$pool) {
+                $pool = Pool::create([
                     'tournament_id' => $tournament->id,
                     'name' => 'A',
+                    'category' => $category,
                 ]);
             }
             
-            // Zoek de poule met de minste scholen
-            $pools = Pool::where('tournament_id', $tournament->id)
-                ->withCount('schools')
-                ->orderBy('schools_count')
-                ->get();
+            // Controleer of poule vol is (max 4 scholen)
+            $schoolCount = $pool->schools()->count();
             
-            if ($pools->count() > 0) {
-                $poolToAdd = $pools->first();
-                $schoolCount = $poolToAdd->schools()->count();
+            if ($schoolCount >= 4) {
+                // Maak nieuwe poule aan (B, C, D, etc.)
+                $lastPool = Pool::where('tournament_id', $tournament->id)
+                    ->where('category', $category)
+                    ->orderBy('name', 'desc')
+                    ->first();
                 
-                // Als poule vol is (4 scholen), maak nieuwe poule aan
-                if ($schoolCount >= 4) {
-                    $lastPoolName = Pool::where('tournament_id', $tournament->id)
-                        ->orderBy('name', 'desc')
-                        ->first()
-                        ->name;
-                    
-                    $nextName = chr(ord($lastPoolName) + 1);
-                    
-                    $poolToAdd = Pool::create([
-                        'tournament_id' => $tournament->id,
-                        'name' => $nextName,
-                    ]);
-                }
+                $lastPoolName = $lastPool ? $lastPool->name : 'A';
+                $nextName = chr(ord($lastPoolName) + 1);
                 
-                $school->pool_id = $poolToAdd->id;
+                $pool = Pool::create([
+                    'tournament_id' => $tournament->id,
+                    'name' => $nextName,
+                    'category' => $category,
+                ]);
+            }
+            
+            // Wijs school toe aan poule (altijd naar eerste toernooi op basis van eerste iteratie)
+            if ($tournaments->first()->id === $tournament->id) {
+                $school->pool_id = $pool->id;
             }
         }
+        
+        // Save na alle toewijzingen
+        $school->save();
     }
 
     public function reject(int $id): RedirectResponse
@@ -135,6 +147,7 @@ class SchoolApprovalController extends Controller
             'contact_person' => 'required|string|max:255',
             'email' => 'required|email|max:255|unique:schools,email,' . $school->id,
             'status' => 'required|in:pending,approved,rejected',
+            'category' => 'nullable|in:3/4,5/6,7/8,brugklas',
         ]);
 
         $school->update($validated);
