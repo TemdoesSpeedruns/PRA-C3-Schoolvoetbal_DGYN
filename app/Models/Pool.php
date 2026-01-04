@@ -11,7 +11,6 @@ class Pool extends Model
     protected $fillable = [
         'tournament_id',
         'name',
-        'category',
     ];
 
     public function tournament(): BelongsTo

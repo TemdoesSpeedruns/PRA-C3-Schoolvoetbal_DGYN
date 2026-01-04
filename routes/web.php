@@ -68,6 +68,9 @@ Route::get('/admin/schools/register', [SchoolRegistrationController::class, 'sho
 
 // Admin routes
 Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {
+    // Main Admin Panel (all in one)
+    Route::get('/panel', [App\Http\Controllers\AdminPanelController::class, 'index'])->name('panel');
+    
     // Pools / Groups
     Route::get('/poules', [App\Http\Controllers\PoolController::class, 'index'])->name('pools.index');
     

@@ -36,6 +36,13 @@
                    @yield('content')
                 @endisset
             </main>
+
+            <!-- Back to Home Button (All Pages) -->
+            <div class="fixed bottom-8 right-8 z-40">
+                <a href="{{ route('home') }}" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg shadow-lg transition-all hover:shadow-xl flex items-center gap-2">
+                    ← Home
+                </a>
+            </div>
         </div>
     </body>
 </html>

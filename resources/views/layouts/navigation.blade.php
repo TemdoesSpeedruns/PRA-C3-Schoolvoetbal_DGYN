@@ -22,12 +22,6 @@
                         {{ __('Home') }}
                     </x-nav-link>
 
-                    <x-nav-link :href="route('results')" :active="request()->routeIs('results')"
-                        class="text-gray-100 hover:text-white"
-                        style="background-color: transparent !important;">
-                        {{ __('Uitslagen') }}
-                    </x-nav-link>
-
                     <x-nav-link :href="route('public.scores')" :active="request()->routeIs('public.scores')"
                         class="text-gray-100 hover:text-white"
                         style="background-color: transparent !important;">
@@ -40,23 +34,15 @@
                         {{ __('Vorige Winnaars') }}
                     </x-nav-link>
 
-                    <x-nav-link :href="route('my.pool')" :active="request()->routeIs('my.pool')"
-                        class="text-gray-100 hover:text-white"
-                        style="background-color: transparent !important;">
-                        {{ __('Mijn Poule') }}
-                    </x-nav-link>
-
-                    <x-nav-link :href="route('AdminDashboard')" :active="request()->routeIs('AdminDashboard')"
-                        class="text-gray-100 hover:text-white"
-                        style="background-color: transparent !important;">
-                        {{ __('Admin Dashboard') }}
-                    </x-nav-link>
-
-                    <x-nav-link :href="route('admin.schools.index')" :active="request()->routeIs('admin.schools.index')"
-                        class="text-gray-100 hover:text-white"
-                        style="background-color: transparent !important;">
-                        {{ __('Admin Scholen') }}
-                    </x-nav-link>
+                    @auth
+                        @if(auth()->user()->is_admin)
+                            <x-nav-link :href="route('admin.panel')" :active="request()->routeIs('admin.panel*')"
+                                class="text-gray-100 hover:text-white"
+                                style="background-color: transparent !important;">
+                                {{ __('🛠️ Admin Panel') }}
+                            </x-nav-link>
+                        @endif
+                    @endauth
 
                     @auth
                     @if(Auth::user()->is_admin)
@@ -161,10 +147,6 @@
             </x-responsive-nav-link>
 
             <x-responsive-nav-link :href="route('results')" :active="request()->routeIs('results')"
-                style="background-color: transparent !important; color: #fff !important;">
-                Uitslagen
-            </x-responsive-nav-link>
-
             <x-responsive-nav-link :href="route('public.scores')" :active="request()->routeIs('public.scores')"
                 style="background-color: transparent !important; color: #fff !important;">
                 Wedstrijdresultaten
@@ -175,23 +157,13 @@
                 Vorige Winnaars
             </x-responsive-nav-link>
 
-            <x-responsive-nav-link :href="route('AdminDashboard')" :active="request()->routeIs('AdminDashboard')"
-                style="background-color: transparent !important; color: #fff !important;">
-                Admin Dashboard
-            </x-responsive-nav-link>
-
-            <x-responsive-nav-link :href="route('admin.schools.index')" :active="request()->routeIs('admin.schools.index')"
-                style="background-color: transparent !important; color: #fff !important;">
-                Admin Scholen
-            </x-responsive-nav-link>
-
             @auth
-            @if(Auth::user()->is_admin)
-            <x-responsive-nav-link :href="route('admin.scores.index')" :active="request()->routeIs('admin.scores.index', 'admin.scores.create', 'admin.scores.edit')"
-                style="background-color: transparent !important; color: #fff !important;">
-                Scores Beheren
-            </x-responsive-nav-link>
-            @endif
+                @if(Auth::user()->is_admin)
+                    <x-responsive-nav-link :href="route('admin.panel')" :active="request()->routeIs('admin.panel*')"
+                        style="background-color: transparent !important; color: #fff !important;">
+                        🛠️ Admin Panel
+                    </x-responsive-nav-link>
+                @endif
             @endauth
 
             <x-responsive-nav-link :href="route('admin.schools.register')" :active="request()->routeIs('admin.schools.register')"

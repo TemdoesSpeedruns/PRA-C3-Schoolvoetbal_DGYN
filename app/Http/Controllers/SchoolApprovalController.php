@@ -41,7 +41,7 @@ class SchoolApprovalController extends Controller
         // Wijs automatisch aan een poule toe
         $this->assignToPool($school);
         
-        $school->save();
+        // Save gebeurt IN assignToPool, niet hier
 
         try {
             Mail::to($school->email)->send(new SchoolRegistrationConfirmation($school, 'approved'));
@@ -54,60 +54,36 @@ class SchoolApprovalController extends Controller
 
     private function assignToPool(School $school): void
     {
-        // Beschikbare categorieën
-        $categories = ['3/4', '5/6', '7/8', 'brugklas'];
+        // Zoek de EERSTE actieve toernooi (simpel)
+        $tournament = \App\Models\Tournament::where('status', 'active')->first();
         
-        // Zoek de actieve toernooien
-        $tournaments = \App\Models\Tournament::where('status', 'active')->get();
-        
-        foreach ($tournaments as $tournament) {
-            // Bepaal categorie: gebruik schoolcategorie of 'all' als niet ingesteld
-            $category = $school->category ?? 'all';
-            
-            // Zoek of maak poule voor deze combinatie (tournament + category)
-            $poolQuery = Pool::where('tournament_id', $tournament->id)
-                ->where('category', $category)
-                ->withCount('schools')
-                ->orderBy('schools_count');
-            
-            $pool = $poolQuery->first();
-            
-            // Als geen poule bestaat, maak eerste poule (A) aan
-            if (!$pool) {
-                $pool = Pool::create([
-                    'tournament_id' => $tournament->id,
-                    'name' => 'A',
-                    'category' => $category,
-                ]);
-            }
-            
-            // Controleer of poule vol is (max 4 scholen)
-            $schoolCount = $pool->schools()->count();
-            
-            if ($schoolCount >= 4) {
-                // Maak nieuwe poule aan (B, C, D, etc.)
-                $lastPool = Pool::where('tournament_id', $tournament->id)
-                    ->where('category', $category)
-                    ->orderBy('name', 'desc')
-                    ->first();
-                
-                $lastPoolName = $lastPool ? $lastPool->name : 'A';
-                $nextName = chr(ord($lastPoolName) + 1);
-                
-                $pool = Pool::create([
-                    'tournament_id' => $tournament->id,
-                    'name' => $nextName,
-                    'category' => $category,
-                ]);
-            }
-            
-            // Wijs school toe aan poule (altijd naar eerste toernooi op basis van eerste iteratie)
-            if ($tournaments->first()->id === $tournament->id) {
-                $school->pool_id = $pool->id;
-            }
+        if (!$tournament) {
+            return; // Geen actieve toernooi = geen toewijzing
         }
         
-        // Save na alle toewijzingen
+        // Stap 1: Vind alle poules voor dit toernooi
+        $pools = Pool::where('tournament_id', $tournament->id)
+            ->withCount('schools')
+            ->orderBy('schools_count', 'asc')
+            ->get();
+        
+        // Stap 2: Vind poule met minst scholen (en niet vol)
+        $availablePool = $pools->firstWhere('schools_count', '<', 4);
+        
+        // Stap 3: Maak poule aan als nodig
+        if (!$availablePool) {
+            // Bepaal naam: A, B, C, D, etc.
+            $existingCount = $pools->count();
+            $poolName = chr(65 + $existingCount); // A=65, B=66, etc.
+            
+            $availablePool = Pool::create([
+                'tournament_id' => $tournament->id,
+                'name' => $poolName,
+            ]);
+        }
+        
+        // Stap 4: Wijs school toe
+        $school->pool_id = $availablePool->id;
         $school->save();
     }
 

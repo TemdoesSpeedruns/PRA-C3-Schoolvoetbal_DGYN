@@ -50,8 +50,8 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('matches', function (Blueprint $table) {
-            $table->dropForeignIdFor('fields');
-            $table->dropForeignIdFor('referees');
+            $table->dropForeignKey(['field_id']);
+            $table->dropForeignKey(['referee_id']);
             $table->dropColumn(['field_id', 'referee_id', 'scheduled_time', 'duration_minutes']);
         });
 
