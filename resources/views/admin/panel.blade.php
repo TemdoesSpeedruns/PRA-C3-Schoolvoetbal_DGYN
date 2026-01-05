@@ -219,9 +219,14 @@
             <div class="bg-white rounded-lg shadow">
                 <div class="px-6 py-4 border-b border-gray-200 flex justify-between items-center">
                     <h3 class="text-lg font-medium text-gray-900">🎯 Toernooien Beheer</h3>
-                    <a href="{{ route('admin.tournaments.index') }}" class="bg-blue-500 hover:bg-blue-600 text-black px-4 py-2 rounded text-sm">
-                        Volledig Overzicht →
-                    </a>
+                    <div class="flex items-center gap-2">
+                        <a href="{{ route('admin.tournaments.index') }}" class="bg-blue-500 hover:bg-blue-600 text-black px-4 py-2 rounded text-sm">
+                            Volledig Overzicht →
+                        </a>
+                        <a href="{{ route('admin.tournaments.index', ['archived' => 1]) }}" class="bg-gray-100 hover:bg-gray-200 text-black px-4 py-2 rounded text-sm">
+                            Archief →
+                        </a>
+                    </div>
                 </div>
                 <div class="divide-y divide-gray-200">
                     @forelse($tournaments as $tournament)
