@@ -5,7 +5,7 @@
     <div class="bg-blue-50 border border-blue-300 rounded-lg p-6 mb-6">
         <h1 class="text-3xl font-bold text-blue-900 mb-2">🎛️ Admin Controle Panel</h1>
         <p class="text-blue-700">Het volledige admin panel vind je hier:</p>
-        <a href="{{ route('admin.panel') }}" class="mt-4 inline-block bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg text-lg">
+        <a href="{{ route('admin.panel') }}" class="mt-4 inline-block bg-blue-600 hover:bg-blue-700 text-black font-bold py-3 px-6 rounded-lg text-lg">
             → Naar Admin Controle Panel
         </a>
     </div>

@@ -16,7 +16,7 @@
                     <div class="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition">
                         <!-- Header -->
                         <div class="bg-gradient-to-r from-purple-600 to-blue-600 px-6 py-4">
-                            <h2 class="text-xl font-bold text-white">{{ $tournament->name }}</h2>
+                            <h2 class="text-xl font-bold text-black">{{ $tournament->name }}</h2>
                             <p class="text-purple-100">Jaar: {{ $tournament->year }}</p>
                         </div>
 

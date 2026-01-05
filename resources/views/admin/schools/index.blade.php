@@ -79,7 +79,7 @@
                             <td class="px-6 py-4 text-center">
                                 <div class="flex gap-2 justify-center flex-wrap">
                                     <a href="{{ route('admin.schools.edit', $school) }}"
-                                        class="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded text-xs font-semibold transition">
+                                        class="bg-blue-500 hover:bg-blue-600 text-black px-3 py-1 rounded text-xs font-semibold transition">
                                         ✏️ Bewerk
                                     </a>
                                     @if($school->isPending())
@@ -88,7 +88,7 @@
                                               class="inline">
                                             @csrf
                                             <button type="submit"
-                                                class="bg-green-500 hover:bg-green-600 text-white px-3 py-1 rounded text-xs font-semibold transition">
+                                                class="bg-green-500 hover:bg-green-600 text-black px-3 py-1 rounded text-xs font-semibold transition">
                                                 ✓ Goedkeuren
                                             </button>
                                         </form>
@@ -99,7 +99,7 @@
                                               onsubmit="return confirm('Weet je zeker dat je deze school wilt afwijzen?');">
                                             @csrf
                                             <button type="submit"
-                                                class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded text-xs font-semibold transition">
+                                                class="bg-red-500 hover:bg-red-600 text-black px-3 py-1 rounded text-xs font-semibold transition">
                                                 ✗ Afwijzen
                                             </button>
                                         </form>
@@ -111,7 +111,7 @@
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit"
-                                                class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded text-xs font-semibold transition">
+                                                class="bg-red-500 hover:bg-red-600 text-black px-3 py-1 rounded text-xs font-semibold transition">
                                                 🗑️ Verwijderen
                                             </button>
                                         </form>

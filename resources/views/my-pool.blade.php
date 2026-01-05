@@ -48,7 +48,7 @@
                                 @endif
                                 <span>{{ $poolSchool->name }}</span>
                                 @if($poolSchool->id === $school->id)
-                                    <span class="ml-auto text-xs bg-blue-500 text-white px-2 py-1 rounded">
+                                    <span class="ml-auto text-xs bg-blue-500 text-black px-2 py-1 rounded">
                                         Jouw school
                                     </span>
                                 @endif
@@ -66,10 +66,10 @@
     </div>
 
     <div class="mt-8 flex flex-col gap-4 sm:flex-row sm:gap-6">
-        <a href="{{ route('public.scores') }}" class="inline-block bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+        <a href="{{ route('public.scores') }}" class="inline-block bg-blue-500 hover:bg-blue-700 text-black font-bold py-2 px-4 rounded">
             → Bekijk wedstrijduitslagen
         </a>
-        <a href="{{ route('home') }}" class="inline-block bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">
+        <a href="{{ route('home') }}" class="inline-block bg-gray-500 hover:bg-gray-700 text-black font-bold py-2 px-4 rounded">
             ← Terug naar home
         </a>
     </div>

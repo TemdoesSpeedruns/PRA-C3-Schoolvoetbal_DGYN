@@ -8,7 +8,7 @@
             <h1 class="text-4xl font-bold mb-2">👨‍⚖️ Scheidsrechters Beheren</h1>
             <p class="text-gray-600">Voeg scheidsrechters toe en beheer hun beschikbaarheid</p>
         </div>
-        <a href="{{ route('admin.schedule.index') }}" class="bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700">
+        <a href="{{ route('admin.schedule.index') }}" class="bg-purple-600 text-black px-4 py-2 rounded-lg hover:bg-purple-700">
             ← Terug naar Planning
         </a>
     </div>
@@ -77,7 +77,7 @@
                         </select>
                     </div>
 
-                    <button type="submit" class="w-full bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 font-semibold">
+                    <button type="submit" class="w-full bg-blue-600 text-black px-4 py-2 rounded-lg hover:bg-blue-700 font-semibold">
                         ➕ Scheidsrechter Toevoegen
                     </button>
                 </form>
@@ -93,7 +93,7 @@
             @else
                 <div class="bg-white rounded-lg shadow-lg overflow-hidden">
                     <table class="w-full">
-                        <thead class="bg-blue-600 text-white">
+                        <thead class="bg-blue-600 text-black">
                             <tr>
                                 <th class="px-6 py-3 text-left">Naam</th>
                                 <th class="px-6 py-3 text-left">Email</th>

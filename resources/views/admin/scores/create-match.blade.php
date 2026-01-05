@@ -79,7 +79,7 @@
         </div>
 
         <div class="flex gap-4">
-            <button type="submit" class="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 font-semibold">
+            <button type="submit" class="bg-blue-600 text-black px-6 py-2 rounded hover:bg-blue-700 font-semibold">
                 Wedstrijd Toevoegen
             </button>
             <a href="{{ route('admin.scores.index') }}" class="bg-gray-300 text-gray-800 px-6 py-2 rounded hover:bg-gray-400 font-semibold">

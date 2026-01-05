@@ -4,7 +4,7 @@
 <div class="container mx-auto px-4 py-6">
     <div class="flex justify-between items-center mb-6">
         <h1 class="text-3xl font-bold">Scores Beheren</h1>
-        <a href="{{ route('admin.scores.create') }}" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
+        <a href="{{ route('admin.scores.create') }}" class="bg-blue-600 text-black px-4 py-2 rounded hover:bg-blue-700">
             Wedstrijd Toevoegen
         </a>
     </div>

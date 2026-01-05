@@ -114,11 +114,11 @@
                                 <div class="mt-2 flex gap-2">
                                     <form action="{{ route('admin.schools.approve', $school->id) }}" method="POST" class="inline">
                                         @csrf
-                                        <button type="submit" class="text-xs bg-green-500 hover:bg-green-600 text-white px-3 py-1 rounded">
+                                        <button type="submit" class="text-xs bg-green-500 hover:bg-green-600 text-black px-3 py-1 rounded">
                                             Goedkeuren
                                         </button>
                                     </form>
-                                    <a href="{{ route('admin.schools.edit', $school->id) }}" class="text-xs bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded">
+                                    <a href="{{ route('admin.schools.edit', $school->id) }}" class="text-xs bg-blue-500 hover:bg-blue-600 text-black px-3 py-1 rounded">
                                         Bekijken
                                     </a>
                                 </div>
@@ -175,7 +175,7 @@
             <div class="bg-white rounded-lg shadow">
                 <div class="px-6 py-4 border-b border-gray-200 flex justify-between items-center">
                     <h3 class="text-lg font-medium text-gray-900">🏫 Scholen Beheer</h3>
-                    <a href="{{ route('admin.schools.index') }}" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded text-sm">
+                    <a href="{{ route('admin.schools.index') }}" class="bg-blue-500 hover:bg-blue-600 text-black px-4 py-2 rounded text-sm">
                         Volledig Overzicht →
                     </a>
                 </div>
@@ -219,7 +219,7 @@
             <div class="bg-white rounded-lg shadow">
                 <div class="px-6 py-4 border-b border-gray-200 flex justify-between items-center">
                     <h3 class="text-lg font-medium text-gray-900">🎯 Toernooien Beheer</h3>
-                    <a href="{{ route('admin.tournaments.index') }}" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded text-sm">
+                    <a href="{{ route('admin.tournaments.index') }}" class="bg-blue-500 hover:bg-blue-600 text-black px-4 py-2 rounded text-sm">
                         Volledig Overzicht →
                     </a>
                 </div>
@@ -241,7 +241,7 @@
                                     ">
                                         {{ ucfirst($tournament->status) }}
                                     </span>
-                                    <a href="{{ route('admin.tournaments.edit', $tournament->id) }}" class="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded text-xs">
+                                    <a href="{{ route('admin.tournaments.edit', $tournament->id) }}" class="bg-blue-500 hover:bg-blue-600 text-black px-3 py-1 rounded text-xs">
                                         Bewerk
                                     </a>
                                 </div>
@@ -261,7 +261,7 @@
             <div class="bg-white rounded-lg shadow">
                 <div class="px-6 py-4 border-b border-gray-200 flex justify-between items-center">
                     <h3 class="text-lg font-medium text-gray-900">🔀 Poules Overzicht</h3>
-                    <a href="{{ route('admin.pools.index') }}" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded text-sm">
+                    <a href="{{ route('admin.pools.index') }}" class="bg-blue-500 hover:bg-blue-600 text-black px-4 py-2 rounded text-sm">
                         Volledig Overzicht →
                     </a>
                 </div>
@@ -299,7 +299,7 @@
             <div class="bg-white rounded-lg shadow">
                 <div class="px-6 py-4 border-b border-gray-200 flex justify-between items-center">
                     <h3 class="text-lg font-medium text-gray-900">⚽ Wedstrijden Beheer</h3>
-                    <a href="{{ route('admin.scores.index') }}" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded text-sm">
+                    <a href="{{ route('admin.scores.index') }}" class="bg-blue-500 hover:bg-blue-600 text-black px-4 py-2 rounded text-sm">
                         Volledig Overzicht →
                     </a>
                 </div>
@@ -318,7 +318,7 @@
                                         <p class="text-xs text-gray-500">⏰ {{ $match->scheduled_time->format('d-m-Y H:i') }}</p>
                                     @endif
                                 </div>
-                                <a href="{{ route('admin.scores.edit', $match->id) }}" class="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded text-xs">
+                                <a href="{{ route('admin.scores.edit', $match->id) }}" class="bg-blue-500 hover:bg-blue-600 text-black px-3 py-1 rounded text-xs">
                                     Bewerk
                                 </a>
                             </div>
@@ -337,7 +337,7 @@
             <div class="bg-white rounded-lg shadow">
                 <div class="px-6 py-4 border-b border-gray-200 flex justify-between items-center">
                     <h3 class="text-lg font-medium text-gray-900">👥 Gebruikers Beheer</h3>
-                    <a href="{{ route('manage.users') }}" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded text-sm">
+                    <a href="{{ route('manage.users') }}" class="bg-blue-500 hover:bg-blue-600 text-black px-4 py-2 rounded text-sm">
                         Volledig Overzicht →
                     </a>
                 </div>

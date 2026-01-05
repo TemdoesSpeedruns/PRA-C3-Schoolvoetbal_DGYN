@@ -125,7 +125,7 @@
             <div class="flex gap-4 pt-6 border-t border-gray-200">
                 <button 
                     type="submit" 
-                    class="flex-1 bg-purple-600 hover:bg-purple-700 text-white font-semibold py-2 px-4 rounded-lg transition duration-200">
+                    class="flex-1 bg-purple-600 hover:bg-purple-700 text-black font-semibold py-2 px-4 rounded-lg transition duration-200">
                     Bijwerken
                 </button>
                 <a 
