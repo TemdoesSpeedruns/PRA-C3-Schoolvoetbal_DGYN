@@ -54,6 +54,12 @@
                     @endif
                     @endauth
 
+                    <x-nav-link :href="route('information.rules')" :active="request()->routeIs('information.rules')"
+                        class="text-gray-100 hover:text-white"
+                        style="background-color: transparent !important;">
+                        {{ __('Spelregels') }}
+                    </x-nav-link>
+
                     <x-nav-link :href="route('admin.schools.register')" :active="request()->routeIs('admin.schools.register')"
                 class="text-gray-100 hover:text-white"
                 style="background-color: transparent !important;">

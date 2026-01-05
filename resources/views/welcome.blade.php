@@ -37,6 +37,16 @@
                 </a>
             </div>
 
+            <!-- Rules Section -->
+            <div class="mt-8 max-w-2xl mx-auto">
+                <!-- Spelregels Card -->
+                <a href="{{ route('information.rules') }}" class="block p-6 bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg shadow-md hover:shadow-lg transition-shadow border-2 border-blue-300 hover:border-blue-600">
+                    <div class="text-3xl mb-2">📋</div>
+                    <h3 class="text-lg font-semibold mb-2 text-gray-800">Spelregels</h3>
+                    <p class="text-gray-700 text-sm">Lees de officiële voetbalregels en bepalingen voor het toernooi</p>
+                </a>
+            </div>
+
             <!-- Info Section -->
             <div class="mt-12 max-w-2xl mx-auto text-black">
                 <h2 class="text-2xl font-semibold mb-4">Over het Toernooi</h2>

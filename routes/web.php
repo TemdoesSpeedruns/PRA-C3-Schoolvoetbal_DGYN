@@ -9,6 +9,7 @@ use App\Http\Controllers\TournamentController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SchoolApprovalController;
 use App\Http\Controllers\SchoolRegistrationController;
+use App\Http\Controllers\InformationController;
 
 // Welcome / Home page
 Route::get('/', function () {
@@ -37,6 +38,9 @@ Route::get('/schema', function() {
 
 // Publieke score weergave
 Route::get('/scores', [ScoreController::class, 'viewPublic'])->name('public.scores');
+
+// Public Information Pages
+Route::get('/spelregels', [InformationController::class, 'rules'])->name('information.rules');
 
 // Dashboard (auth + verified)
 Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'index'])
