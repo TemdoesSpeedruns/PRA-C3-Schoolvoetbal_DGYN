@@ -23,6 +23,7 @@
                     <th class="px-6 py-3 text-left text-sm font-semibold">Thuis</th>
                     <th class="px-6 py-3 text-left text-sm font-semibold">Uit</th>
                     <th class="px-6 py-3 text-center text-sm font-semibold">Score</th>
+                    <th class="px-6 py-3 text-left text-sm font-semibold">Scheidsrechter</th>
                     <th class="px-6 py-3 text-left text-sm font-semibold">Status</th>
                     <th class="px-6 py-3 text-left text-sm font-semibold">Datum</th>
                     <th class="px-6 py-3 text-center text-sm font-semibold">Acties</th>
@@ -39,6 +40,13 @@
                                 {{ $match->home_goals }} - {{ $match->away_goals }}
                             @else
                                 <span class="text-gray-400">-</span>
+                            @endif
+                        </td>
+                        <td class="px-6 py-4 text-sm">
+                            @if ($match->referee)
+                                <span class="text-green-700 font-semibold">{{ $match->referee->name }}</span>
+                            @else
+                                <span class="text-gray-400 italic">Niet toegewezen</span>
                             @endif
                         </td>
                         <td class="px-6 py-4 text-sm">

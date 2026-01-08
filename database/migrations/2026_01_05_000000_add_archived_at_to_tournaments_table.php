@@ -12,7 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('tournaments', function (Blueprint $table) {
-            $table->timestamp('archived_at')->nullable()->after('status');
+            if (!Schema::hasColumn('tournaments', 'archived_at')) {
+                $table->timestamp('archived_at')->nullable()->after('status');
+            }
         });
     }
 

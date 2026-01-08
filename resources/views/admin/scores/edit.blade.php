@@ -75,6 +75,25 @@
         </div>
 
         <div class="mb-6">
+            <label for="referee_id" class="block text-sm font-semibold mb-2">Scheidsrechter</label>
+            <select id="referee_id" name="referee_id"
+                class="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <option value="">-- Selecteer een scheidsrechter --</option>
+                @foreach($referees as $referee)
+                    <option value="{{ $referee->id }}" @selected($match->referee_id === $referee->id)>
+                        {{ $referee->name }}
+                        @if($referee->type)
+                            ({{ ucfirst($referee->type) }})
+                        @endif
+                    </option>
+                @endforeach
+            </select>
+            @error('referee_id')
+                <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+            @enderror
+        </div>
+
+        <div class="mb-6">
             <label for="notes" class="block text-sm font-semibold mb-2">Opmerkingen (scheidsrechter)</label>
             <textarea id="notes" name="notes" rows="4"
                 class="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"

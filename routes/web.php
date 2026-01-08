@@ -9,6 +9,7 @@ use App\Http\Controllers\TournamentController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SchoolApprovalController;
 use App\Http\Controllers\SchoolRegistrationController;
+use App\Http\Controllers\RefereeRegistrationController;
 use App\Http\Controllers\InformationController;
 
 // Welcome / Home page
@@ -70,6 +71,10 @@ Route::get('/scholen/registreren', [SchoolRegistrationController::class, 'showFo
 Route::post('/scholen/registreren', [SchoolRegistrationController::class, 'register'])->name('schools.register');
 Route::get('/admin/schools/register', [SchoolRegistrationController::class, 'showForm'])->name('admin.schools.register');
 
+// Scheidsrechter registratie (PUBLIC)
+Route::get('/scheidsrechter/aanmelden', [RefereeRegistrationController::class, 'showForm'])->name('referees.register.form');
+Route::post('/scheidsrechter/aanmelden', [RefereeRegistrationController::class, 'register'])->name('referees.register');
+
 // Admin routes
 Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {
     // Main Admin Panel (all in one)
@@ -109,8 +114,10 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     Route::post('/schedule/fields', [\App\Http\Controllers\ScheduleController::class, 'fieldStore'])->name('schedule.fields.store');
     
     // Referees / Scheidsrechters beheer
-    Route::get('/schedule/referees', [\App\Http\Controllers\ScheduleController::class, 'refereesIndex'])->name('schedule.referees.index');
-    Route::post('/schedule/referees', [\App\Http\Controllers\ScheduleController::class, 'refereeStore'])->name('schedule.referees.store');
+    Route::get('/scheidsrechters', [RefereeRegistrationController::class, 'index'])->name('referees.index');
+    Route::get('/scheidsrechters/{referee}/edit', [RefereeRegistrationController::class, 'edit'])->name('referees.edit');
+    Route::patch('/scheidsrechters/{referee}', [RefereeRegistrationController::class, 'update'])->name('referees.update');
+    Route::delete('/scheidsrechters/{referee}', [RefereeRegistrationController::class, 'destroy'])->name('referees.destroy');
 });
 
 // Include Breeze / auth routes

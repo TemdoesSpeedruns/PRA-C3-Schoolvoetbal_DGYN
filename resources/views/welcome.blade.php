@@ -14,7 +14,7 @@
             </p>
 
             <!-- Navigation Section -->
-            <div class="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+            <div class="mt-12 grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
                 <!-- Wedstrijdresultaten Card -->
                 <a href="{{ route('public.scores') }}" class="block p-6 bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow border-2 border-gray-200 hover:border-blue-500">
                     <div class="text-3xl mb-2">⚽</div>
@@ -34,6 +34,13 @@
                     <div class="text-3xl mb-2">📝</div>
                     <h3 class="text-xl font-semibold mb-2 text-gray-800">Registreer School</h3>
                     <p class="text-gray-600">Schrijf je school in voor het toernooi</p>
+                </a>
+
+                <!-- Registreer Scheidsrechter Card -->
+                <a href="{{ route('referees.register.form') }}" class="block p-6 bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow border-2 border-gray-200 hover:border-green-500">
+                    <div class="text-3xl mb-2">🏁</div>
+                    <h3 class="text-xl font-semibold mb-2 text-gray-800">Scheidsrechter</h3>
+                    <p class="text-gray-600">Meld jezelf aan als scheidsrechter</p>
                 </a>
             </div>
 

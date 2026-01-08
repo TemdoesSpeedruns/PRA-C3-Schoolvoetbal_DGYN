@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\GameMatch;
 use App\Models\Tournament;
 use App\Models\School;
+use App\Models\Referee;
 use Illuminate\Http\Request;
 
 class ScoreController extends Controller
@@ -44,7 +45,7 @@ class ScoreController extends Controller
     // Admin kan scores invoeren
     public function index()
     {
-        $matches = GameMatch::with(['tournament', 'homeSchool', 'awaySchool'])
+        $matches = GameMatch::with(['tournament', 'homeSchool', 'awaySchool', 'referee'])
             ->orderBy('match_date', 'desc')
             ->get();
         return view('admin.scores.index', compact('matches'));
@@ -52,7 +53,10 @@ class ScoreController extends Controller
 
     public function edit(GameMatch $match)
     {
-        return view('admin.scores.edit', compact('match'));
+        $referees = Referee::where('is_active', true)
+            ->orderBy('name')
+            ->get();
+        return view('admin.scores.edit', compact('match', 'referees'));
     }
 
     public function update(Request $request, GameMatch $match)
@@ -61,6 +65,7 @@ class ScoreController extends Controller
             'home_goals' => 'required|integer|min:0|max:99',
             'away_goals' => 'required|integer|min:0|max:99',
             'status' => 'required|in:scheduled,live,completed',
+            'referee_id' => 'nullable|exists:referees,id',
             'notes' => 'nullable|string|max:1000',
         ]);
 
