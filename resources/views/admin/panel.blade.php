@@ -80,6 +80,9 @@
                     <button onclick="showTab('schools')" class="tab-btn py-4 px-6 border-b-2 border-transparent font-medium text-sm text-gray-500 hover:text-gray-700 hover:border-gray-300">
                         🏫 Scholen
                     </button>
+                    <button onclick="showTab('referees')" class="tab-btn py-4 px-6 border-b-2 border-transparent font-medium text-sm text-gray-500 hover:text-gray-700 hover:border-gray-300">
+                        🏁 Scheidsrechters
+                    </button>
                     <button onclick="showTab('tournaments')" class="tab-btn py-4 px-6 border-b-2 border-transparent font-medium text-sm text-gray-500 hover:text-gray-700 hover:border-gray-300">
                         🎯 Toernooien
                     </button>
@@ -211,6 +214,97 @@
                         </div>
                     @endforelse
                 </div>
+            </div>
+        </div>
+
+        <!-- REFEREES TAB -->
+        <div id="referees" class="tab-content hidden">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- Pending Referees -->
+                <div class="bg-white rounded-lg shadow">
+                    <div class="px-6 py-4 border-b border-gray-200">
+                        <h3 class="text-lg font-medium text-gray-900">⏳ Scheidsrechters Aanmeldingen</h3>
+                    </div>
+                    <div class="divide-y divide-gray-200 max-h-96 overflow-y-auto">
+                        @forelse($pending_referees as $referee)
+                            <div class="px-6 py-4">
+                                <p class="text-sm font-medium text-gray-900">{{ $referee->name }}</p>
+                                <p class="text-xs text-gray-500">{{ $referee->email }}</p>
+                                <p class="text-xs text-gray-500">Type: <span class="font-semibold">{{ ucfirst($referee->type) }}</span></p>
+                                @if($referee->experience)
+                                    <p class="text-xs text-gray-500">Ervaring: {{ $referee->experience }} jaar</p>
+                                @endif
+                                <div class="mt-2 flex gap-2">
+                                    <form action="{{ route('admin.referees.approve', $referee->id) }}" method="POST" class="inline">
+                                        @csrf
+                                        <button type="submit" class="text-xs bg-green-500 hover:bg-green-600 text-black px-3 py-1 rounded">
+                                            ✓ Goedkeuren
+                                        </button>
+                                    </form>
+                                    <form action="{{ route('admin.referees.reject', $referee->id) }}" method="POST" class="inline">
+                                        @csrf
+                                        <button type="submit" class="text-xs bg-red-500 hover:bg-red-600 text-black px-3 py-1 rounded">
+                                            ✗ Afwijzen
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                        @empty
+                            <div class="px-6 py-4 text-sm text-gray-500">
+                                Geen hangende aanmeldingen
+                            </div>
+                        @endforelse
+                    </div>
+                </div>
+
+                <!-- Active Referees -->
+                <div class="bg-white rounded-lg shadow">
+                    <div class="px-6 py-4 border-b border-gray-200">
+                        <h3 class="text-lg font-medium text-gray-900">✅ Actieve Scheidsrechters</h3>
+                    </div>
+                    <div class="divide-y divide-gray-200 max-h-96 overflow-y-auto">
+                        @forelse($active_referees as $referee)
+                            <div class="px-6 py-4">
+                                <div class="flex items-center justify-between">
+                                    <div class="flex-1">
+                                        <p class="text-sm font-medium text-gray-900">{{ $referee->name }}</p>
+                                        <p class="text-xs text-gray-500">{{ $referee->email }}</p>
+                                        <span class="inline-block mt-1 px-2 py-1 rounded text-xs font-medium
+                                            @if ($referee->type === 'professional') bg-purple-100 text-purple-800
+                                            @elseif ($referee->type === 'senior') bg-blue-100 text-blue-800
+                                            @else bg-gray-100 text-gray-800
+                                            @endif">
+                                            {{ ucfirst($referee->type) }}
+                                        </span>
+                                    </div>
+                                    <div class="flex gap-2">
+                                        <a href="{{ route('admin.referees.edit', $referee) }}" class="text-xs bg-blue-500 hover:bg-blue-600 text-black px-3 py-1 rounded">
+                                            Bewerk
+                                        </a>
+                                        <form action="{{ route('admin.referees.destroy', $referee) }}" method="POST" class="inline" onsubmit="return confirm('Zeker weten?')">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="text-xs bg-red-500 hover:bg-red-600 text-black px-3 py-1 rounded">
+                                                Verwijder
+                                            </button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        @empty
+                            <div class="px-6 py-4 text-sm text-gray-500">
+                                Geen actieve scheidsrechters
+                            </div>
+                        @endforelse
+                    </div>
+                </div>
+            </div>
+
+            <!-- Full Overview Link -->
+            <div class="mt-6">
+                <a href="{{ route('admin.referees.approvals') }}" class="bg-blue-500 hover:bg-blue-600 text-black px-6 py-3 rounded font-medium inline-block">
+                    📋 Volledig Overzicht Scheidsrechters →
+                </a>
             </div>
         </div>
 

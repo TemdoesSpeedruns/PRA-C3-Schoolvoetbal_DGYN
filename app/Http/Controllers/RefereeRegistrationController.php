@@ -22,10 +22,11 @@ class RefereeRegistrationController extends Controller
             'experience' => 'nullable|integer|min:0|max:100',
         ]);
 
-        $referee = Referee::create($data + ['is_active' => true]);
+        // Status standaard op 'pending' tot admin het goedkeurt
+        $referee = Referee::create($data + ['status' => 'pending', 'is_active' => false]);
 
         return redirect()->route('referees.register.form')
-            ->with('success', 'Dank u wel voor uw aanmelding als scheidsrechter! U bent nu actief in het systeem.');
+            ->with('success', 'Dank u wel voor uw aanmelding! Uw aanvraag wordt binnenkort beoordeeld door de beheerder.');
     }
 
     public function index()
@@ -35,6 +36,39 @@ class RefereeRegistrationController extends Controller
             ->get();
         
         return view('admin.referees.index', compact('referees'));
+    }
+
+    public function approvals()
+    {
+        $status = request('status', 'pending');
+        
+        $query = Referee::orderBy('created_at', 'desc');
+        
+        if ($status !== 'all') {
+            $query->where('status', $status);
+        }
+        
+        $referees = $query->paginate(20);
+        
+        return view('admin.referees.approvals', compact('referees', 'status'));
+    }
+
+    public function approve(Referee $referee)
+    {
+        $referee->status = 'approved';
+        $referee->is_active = true;
+        $referee->save();
+
+        return back()->with('success', 'Scheidsrechter "' . $referee->name . '" is goedgekeurd!');
+    }
+
+    public function reject(Referee $referee)
+    {
+        $referee->status = 'rejected';
+        $referee->is_active = false;
+        $referee->save();
+
+        return back()->with('success', 'Scheidsrechter "' . $referee->name . '" is afgewezen.');
     }
 
     public function edit(Referee $referee)

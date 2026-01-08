@@ -4,9 +4,14 @@
 <div class="container mx-auto px-4 py-6">
     <div class="flex justify-between items-center mb-6">
         <h1 class="text-3xl font-bold">Scheidsrechters Beheren</h1>
-        <a href="{{ route('referees.register.form') }}" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
-            + Scheidsrechter Toevoegen
-        </a>
+        <div class="flex gap-3">
+            <a href="{{ route('admin.referees.approvals') }}" class="bg-yellow-600 text-white px-4 py-2 rounded hover:bg-yellow-700">
+                📋 Aanmeldingen
+            </a>
+            <a href="{{ route('referees.register.form') }}" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
+                + Toevoegen
+            </a>
+        </div>
     </div>
 
     @if (session('success'))

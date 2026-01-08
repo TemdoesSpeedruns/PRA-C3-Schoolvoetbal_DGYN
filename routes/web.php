@@ -115,6 +115,9 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     
     // Referees / Scheidsrechters beheer
     Route::get('/scheidsrechters', [RefereeRegistrationController::class, 'index'])->name('referees.index');
+    Route::get('/scheidsrechters/aanmeldingen/goedkeuren', [RefereeRegistrationController::class, 'approvals'])->name('referees.approvals');
+    Route::post('/scheidsrechters/{referee}/approve', [RefereeRegistrationController::class, 'approve'])->name('referees.approve');
+    Route::post('/scheidsrechters/{referee}/reject', [RefereeRegistrationController::class, 'reject'])->name('referees.reject');
     Route::get('/scheidsrechters/{referee}/edit', [RefereeRegistrationController::class, 'edit'])->name('referees.edit');
     Route::patch('/scheidsrechters/{referee}', [RefereeRegistrationController::class, 'update'])->name('referees.update');
     Route::delete('/scheidsrechters/{referee}', [RefereeRegistrationController::class, 'destroy'])->name('referees.destroy');

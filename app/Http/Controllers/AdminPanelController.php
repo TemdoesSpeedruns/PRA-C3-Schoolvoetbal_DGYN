@@ -28,6 +28,10 @@ class AdminPanelController extends Controller
         $fields = Field::where('is_active', true)->get();
         $referees = Referee::where('is_active', true)->get();
         
+        // Referees data
+        $pending_referees = Referee::where('status', 'pending')->orderBy('created_at', 'desc')->get();
+        $active_referees = Referee::where('status', 'approved')->where('is_active', true)->orderBy('name')->get();
+        
         // Statistics
         $stats = [
             'total_schools' => School::count(),
@@ -49,6 +53,8 @@ class AdminPanelController extends Controller
             'users',
             'fields',
             'referees',
+            'pending_referees',
+            'active_referees',
             'stats'
         ));
     }
