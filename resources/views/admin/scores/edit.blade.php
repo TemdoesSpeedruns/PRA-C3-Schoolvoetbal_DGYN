@@ -19,8 +19,8 @@
                 <p class="text-lg font-semibold">{{ $match->tournament->name }}</p>
             </div>
             <div>
-                <p class="text-gray-600 text-sm">Datum</p>
-                <p class="text-lg font-semibold">{{ $match->match_date?->format('d-m-Y H:i') }}</p>
+                <p class="text-gray-600 text-sm">Datum & Tijd</p>
+                <p class="text-lg font-semibold">{{ $match->scheduled_time?->format('d-m-Y H:i') ?? 'Niet ingepland' }}</p>
             </div>
         </div>
     </div>

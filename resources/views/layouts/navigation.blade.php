@@ -19,19 +19,19 @@
                     <x-nav-link :href="route('home')" :active="request()->routeIs('home')"
                         class="text-gray-100 hover:text-white"
                         style="background-color: transparent !important;">
-                        {{ __('Home') }}
+                        🏠 {{ __('Home') }}
                     </x-nav-link>
 
                     <x-nav-link :href="route('public.scores')" :active="request()->routeIs('public.scores')"
                         class="text-gray-100 hover:text-white"
                         style="background-color: transparent !important;">
-                        {{ __('Wedstrijdresultaten') }}
+                        📊 {{ __('Wedstrijdresultaten') }}
                     </x-nav-link>
 
                     <x-nav-link :href="route('historie')" :active="request()->routeIs('historie')"
                         class="text-gray-100 hover:text-white"
                         style="background-color: transparent !important;">
-                        {{ __('Vorige Winnaars') }}
+                        🏆 {{ __('Vorige Winnaars') }}
                     </x-nav-link>
 
                     @auth
@@ -49,7 +49,7 @@
                     <x-nav-link :href="route('admin.scores.index')" :active="request()->routeIs('admin.scores.index', 'admin.scores.create', 'admin.scores.edit')"
                         class="text-gray-100 hover:text-white"
                         style="background-color: transparent !important;">
-                        {{ __('Scores Beheren') }}
+                        ⚽ {{ __('Scores Beheren') }}
                     </x-nav-link>
                     @endif
                     @endauth
@@ -57,13 +57,13 @@
                     <x-nav-link :href="route('information.rules')" :active="request()->routeIs('information.rules')"
                         class="text-gray-100 hover:text-white"
                         style="background-color: transparent !important;">
-                        {{ __('Spelregels') }}
+                        📋 {{ __('Spelregels') }}
                     </x-nav-link>
 
                     <x-nav-link :href="route('admin.schools.register')" :active="request()->routeIs('admin.schools.register')"
                 class="text-gray-100 hover:text-white"
                 style="background-color: transparent !important;">
-                {{ __('Registreer School') }}
+                📝 {{ __('Registreer School') }}
                 </x-nav-link>
                 </div>
 
@@ -149,18 +149,18 @@
         <div class="pt-2 pb-3 space-y-1" style="background-color: transparent !important;">
             <x-responsive-nav-link :href="route('home')" :active="request()->routeIs('home')"
                 style="background-color: transparent !important; color: #fff !important;">
-                Home
+                🏠 Home
             </x-responsive-nav-link>
 
             <x-responsive-nav-link :href="route('results')" :active="request()->routeIs('results')"
             <x-responsive-nav-link :href="route('public.scores')" :active="request()->routeIs('public.scores')"
                 style="background-color: transparent !important; color: #fff !important;">
-                Wedstrijdresultaten
+                📊 Wedstrijdresultaten
             </x-responsive-nav-link>
 
             <x-responsive-nav-link :href="route('historie')" :active="request()->routeIs('historie')"
                 style="background-color: transparent !important; color: #fff !important;">
-                Vorige Winnaars
+                🏆 Vorige Winnaars
             </x-responsive-nav-link>
 
             @auth
@@ -175,7 +175,7 @@
             <x-responsive-nav-link :href="route('admin.schools.register')" :active="request()->routeIs('admin.schools.register')"
                 class="text-gray-100 hover:text-white"
                 style="background-color: transparent !important; color: #fff !important;">
-                {{ __('Registreer School') }}
+                📝 {{ __('Registreer School') }}
             </x-responsive-nav-link>
 
         </div>

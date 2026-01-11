@@ -58,7 +58,7 @@
                                 {{ ucfirst($match->status) }}
                             </span>
                         </td>
-                        <td class="px-6 py-4 text-sm">{{ $match->match_date?->format('d-m-Y H:i') }}</td>
+                        <td class="px-6 py-4 text-sm">{{ $match->scheduled_time?->format('d-m-Y H:i') ?? 'Niet ingepland' }}</td>
                         <td class="px-6 py-4 text-center">
                             <div class="flex gap-2 justify-center">
                                 <a href="{{ route('admin.scores.edit', $match) }}" 

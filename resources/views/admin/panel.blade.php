@@ -365,6 +365,20 @@
                     </a>
                 </div>
                 <div class="p-6">
+                    <div class="mb-6 bg-blue-50 border border-blue-200 rounded p-4">
+                        <h4 class="text-sm font-semibold text-blue-900 mb-3">⚡ Snelle Acties</h4>
+                        <p class="text-sm text-blue-800 mb-3">Selecteer een toernooi om scholen automatisch in poules in te delen:</p>
+                        <div class="flex flex-wrap gap-2">
+                            @forelse($tournaments as $tournament)
+                                <a href="{{ route('admin.tournament.pools.index', $tournament) }}" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded text-sm">
+                                    {{ $tournament->name }}
+                                </a>
+                            @empty
+                                <p class="text-sm text-gray-500">Geen toernooien beschikbaar</p>
+                            @endforelse
+                        </div>
+                    </div>
+
                     @forelse($tournaments as $tournament)
                         @if($tournament->pools->isNotEmpty())
                             <div class="mb-6">

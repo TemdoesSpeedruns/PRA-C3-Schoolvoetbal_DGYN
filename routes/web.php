@@ -11,6 +11,7 @@ use App\Http\Controllers\SchoolApprovalController;
 use App\Http\Controllers\SchoolRegistrationController;
 use App\Http\Controllers\RefereeRegistrationController;
 use App\Http\Controllers\InformationController;
+use App\Http\Controllers\TournamentPoolController;
 
 // Welcome / Home page
 Route::get('/', function () {
@@ -82,6 +83,13 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     
     // Pools / Groups
     Route::get('/poules', [App\Http\Controllers\PoolController::class, 'index'])->name('pools.index');
+    
+    // Tournament Pools (automatisch indelen en wedstrijden maken)
+    Route::get('/toernooien/{tournament}/poules', [TournamentPoolController::class, 'index'])->name('tournament.pools.index');
+    Route::post('/toernooien/{tournament}/poules/allocate', [TournamentPoolController::class, 'allocateSchools'])->name('tournament.pools.allocate');
+    Route::post('/toernooien/{tournament}/poules/create-matches', [TournamentPoolController::class, 'createMatches'])->name('tournament.pools.createMatches');
+    Route::post('/toernooien/{tournament}/poules/reset', [TournamentPoolController::class, 'reset'])->name('tournament.pools.reset');
+    Route::delete('/toernooien/{tournament}/poules/{poolId}', [TournamentPoolController::class, 'destroy'])->name('tournament.pools.destroy');
     
     // Tournaments
     Route::get('/toernooien', [TournamentController::class, 'index'])->name('tournaments.index');
