@@ -6,17 +6,17 @@
         <!-- Header -->
         <div class="flex justify-between items-center mb-8">
             <div>
-                <h1 class="text-4xl font-bold text-white">📊 Poule Indeling</h1>
+                <h1 class="text-4xl font-bold text-black">📊 Poule Indeling</h1>
                 <p class="text-slate-400 mt-2">{{ $tournament->name }}</p>
             </div>
-            <a href="{{ route('admin.tournaments.index') }}" class="px-6 py-3 bg-slate-700 hover:bg-slate-600 text-white rounded-lg transition">
+            <a href="{{ route('admin.tournaments.index') }}" class="px-6 py-3 bg-slate-700 hover:bg-slate-600 text-black rounded-lg transition">
                 ← Terug naar toernooien
             </a>
         </div>
 
         <!-- Flash Messages -->
         @if ($errors->any())
-            <div class="bg-red-500 text-white p-4 rounded-lg mb-6">
+            <div class="bg-red-500 text-black p-4 rounded-lg mb-6">
                 <strong>Fout!</strong>
                 <ul class="mt-2">
                     @foreach ($errors->all() as $error)
@@ -27,19 +27,19 @@
         @endif
 
         @if (session('success'))
-            <div class="bg-green-500 text-white p-4 rounded-lg mb-6">
+            <div class="bg-green-500 text-black p-4 rounded-lg mb-6">
                 ✓ {{ session('success') }}
             </div>
         @endif
 
         @if (session('error'))
-            <div class="bg-red-500 text-white p-4 rounded-lg mb-6">
+            <div class="bg-red-500 text-black p-4 rounded-lg mb-6">
                 ✗ {{ session('error') }}
             </div>
         @endif
 
         @if (session('info'))
-            <div class="bg-blue-500 text-white p-4 rounded-lg mb-6">
+            <div class="bg-blue-500 text-black p-4 rounded-lg mb-6">
                 ℹ {{ session('info') }}
             </div>
         @endif
@@ -48,11 +48,11 @@
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
             <div class="bg-slate-700 rounded-lg p-6 border border-slate-600">
                 <div class="text-sm text-slate-400 mb-2">Poules aangemaakt</div>
-                <div class="text-3xl font-bold text-white">{{ $pools->count() }}</div>
+                <div class="text-3xl font-bold text-black">{{ $pools->count() }}</div>
             </div>
             <div class="bg-slate-700 rounded-lg p-6 border border-slate-600">
                 <div class="text-sm text-slate-400 mb-2">Totale scholen in poules</div>
-                <div class="text-3xl font-bold text-white">{{ $pools->sum(fn($p) => $p->schools()->count()) }}</div>
+                <div class="text-3xl font-bold text-black">{{ $pools->sum(fn($p) => $p->schools()->count()) }}</div>
             </div>
             <div class="bg-slate-700 rounded-lg p-6 border border-slate-600">
                 <div class="text-sm text-slate-400 mb-2">Wachtende scholen</div>
@@ -62,7 +62,7 @@
 
         <!-- Action Buttons -->
         <div class="bg-slate-700 rounded-lg p-6 mb-8 border border-slate-600">
-            <h2 class="text-xl font-bold text-white mb-6">🎯 Acties</h2>
+            <h2 class="text-xl font-bold text-black mb-6">🎯 Acties</h2>
             <div class="grid grid-cols-1 gap-4">
                 <!-- Allocate Schools -->
                 <form method="POST" action="{{ route('admin.tournament.pools.allocate', $tournament) }}" onsubmit="return confirm('Weet je zeker? Dit zal {{ $pendingSchools }} scholen indelen in poules.');">

@@ -93,6 +93,8 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     
     // Tournaments
     Route::get('/toernooien', [TournamentController::class, 'index'])->name('tournaments.index');
+    Route::get('/toernooien/create', [TournamentController::class, 'create'])->name('tournaments.create');
+    Route::post('/toernooien', [TournamentController::class, 'store'])->name('tournaments.store');
     Route::get('/toernooien/{tournament}/edit', [TournamentController::class, 'edit'])->name('tournaments.edit');
     Route::patch('/toernooien/{tournament}', [TournamentController::class, 'update'])->name('tournaments.update');
 

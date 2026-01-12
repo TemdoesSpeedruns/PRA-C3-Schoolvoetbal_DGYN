@@ -2,9 +2,14 @@
 
 @section('content')
 <div class="container mx-auto px-4 py-6">
-    <div class="mb-6">
-        <h1 class="text-3xl font-bold text-gray-900">Toernooien Beheren</h1>
-        <p class="text-gray-600 mt-2">Beheer toernooien, set winnaars en voltooide status</p>
+    <div class="mb-6 flex justify-between items-start">
+        <div>
+            <h1 class="text-3xl font-bold text-gray-900">Toernooien Beheren</h1>
+            <p class="text-gray-600 mt-2">Beheer toernooien, set winnaars en voltooide status</p>
+        </div>
+        <a href="{{ route('admin.tournaments.create') }}" class="px-4 py-2 bg-purple-600 text-white rounded-lg font-semibold hover:bg-purple-700 transition">
+            + Nieuw Toernooi
+        </a>
     </div>
 
     @if(session('status'))
