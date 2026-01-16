@@ -37,11 +37,10 @@ class SchoolApprovalController extends Controller
     {
         $school = School::findOrFail($id);
         $school->status = 'approved';
+        $school->save();
         
         // Wijs automatisch aan een poule toe
         $this->assignToPool($school);
-        
-        // Save gebeurt IN assignToPool, niet hier
 
         try {
             Mail::to($school->email)->send(new SchoolRegistrationConfirmation($school, 'approved'));
